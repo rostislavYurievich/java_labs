@@ -1,4 +1,5 @@
 import java.util.HashMap;
+
 /**
  * This class stores the basic state necessary for the A* algorithm to compute a
  * path across a map.  This state includes a collection of "open waypoints" and
@@ -11,8 +12,8 @@ public class AStarState
     /** This is a reference to the map that the A* algorithm is navigating. **/
     private Map2D map;
 
-    private Map<Location, Waypoint> = new HashMap<Location, Waypoint> openWaypoint;
-    private Map<Location, Waypoint> = new HashMap<Location, Waypoint> closedWaypoint;
+    private HashMap<Location, Waypoint> openWaypoint = new HashMap<Location, Waypoint>();
+    private HashMap<Location, Waypoint> closedWaypoint = new HashMap<Location, Waypoint>();
     /**
      * Initialize a new state object for the A* pathfinding algorithm to use.
      **/
@@ -37,11 +38,17 @@ public class AStarState
      **/
     public Waypoint getMinOpenWaypoint()
     {
-
-    }
-
-
+        if (openWaypoint.isEmpty()) return null;
+        Waypoint min_waypoint = null;
+        float min_cost = -1;
+        for (Waypoint value : openWaypoint.values()){
+            if ((min_waypoint==null)||(value.getTotalCost()<min_cost)){
+                min_waypoint = value;
+                min_cost = value.getTotalCost();
+            }
         }
+        return min_waypoint;
+
     }
 
     /**
@@ -55,7 +62,19 @@ public class AStarState
      **/
     public boolean addOpenWaypoint(Waypoint newWP)
     {
-        // TODO:  Implement.
+
+        if (openWaypoint.containsKey(newWP.getLocation())) {
+            Location loc = newWP.getLocation();
+            if (newWP.getPreviousCost() < openWaypoint.get(loc).getPreviousCost()){
+                openWaypoint.put(loc,newWP);
+                return true;
+            }
+        }
+        else {
+            openWaypoint.put(newWP.getLocation(),newWP);
+            return true;
+        }
+
         return false;
     }
 
@@ -63,7 +82,7 @@ public class AStarState
     /** Returns the current number of open waypoints. **/
     public int numOpenWaypoints()
     {
-        return openWaypoint.size;
+        return openWaypoint.size();
     }
 
 
@@ -73,7 +92,8 @@ public class AStarState
      **/
     public void closeWaypoint(Location loc)
     {
-        // TODO:  Implement.
+        closedWaypoint.put(loc,openWaypoint.get(loc));
+        openWaypoint.remove(loc);
     }
 
     /**
@@ -82,8 +102,7 @@ public class AStarState
      **/
     public boolean isLocationClosed(Location loc)
     {
-        // TODO:  Implement.
-        return false;
+        return closedWaypoint.containsKey(loc);
     }
 }
 

@@ -24,15 +24,18 @@ public class Location
         this(0, 0);
     }
 
-    public boolean equals(Location o){
-        return (this.xCoord==o.xCoord)&&(this.yCoord==o.yCoord);
+    public boolean equals(Object o) {
+
+        if (o == null) return false;
+        Location loc = (Location) o;
+        return (xCoord == loc.xCoord) && (yCoord == loc.yCoord);
     }
 
     public int hashCode() {
         int result = 17; // Some prime value
         // Use another prime value to combine
-        result = 37 * result + xCoord.hashCode();
-        result = 37 * result + yCoord.hashCode();
+        result = 37 * result + xCoord;
+        result = 37 * result + yCoord;
         return result;
     }
 }
