@@ -27,7 +27,6 @@ class FractalExplorer {
         frame.setLayout(new java.awt.BorderLayout());
         frame.add(jid, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
-        //TODO Add corresponding window header
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack(); frame.setVisible(true); frame.setResizable(false);
     }

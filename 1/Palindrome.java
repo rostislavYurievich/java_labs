@@ -1,6 +1,7 @@
 public class Palindrome {
     /*
-    Выводит последовательность true/false для строк переданных через аргументы при запуске
+    Выводит последовательность true/false для строк переданных через
+    аргументы при запуске
     */
     public static void main(String[] args) {
         for (int i = 0; i < args.length; i++) {

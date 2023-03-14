@@ -19,6 +19,10 @@ public class Lab1{
         y = in.nextDouble();
         z = in.nextDouble();
         Point3d c = new Point3d(x,y,z);
+        if (c.equals(b)||a.equals(b)||c.equals(a)) {
+            System.out.print("Несколько точек равны друг другу.\n");
+            return;
+        }
         System.out.printf("Площадь треугольника: %.5f %n",computeArea(a,b,c));
 
     }

@@ -23,14 +23,14 @@ public class Location
     {
         this(0, 0);
     }
-
+    @Override
     public boolean equals(Object o) {
-
         if (o == null) return false;
         Location loc = (Location) o;
         return (xCoord == loc.xCoord) && (yCoord == loc.yCoord);
     }
 
+    @Override
     public int hashCode() {
         int result = 17; // Some prime value
         // Use another prime value to combine
