@@ -1,4 +1,4 @@
-import java.awt.geom.Rectangle2D.Double;
+import java.awt.geom.Rectangle2D;
 
 class Mandelbrot extends FractalGenerator{
 
@@ -9,7 +9,7 @@ class Mandelbrot extends FractalGenerator{
         double temp, re = x, im = y;
         int i;
         for (i = 0;(i < MAX_ITERATIONS)||(re*re+im*im>4); i++){
-            temp = re*re- im*im+x;
+            temp = re*re-im*im+x;
             im = 2*re*im+y;
             re = temp;
         }
@@ -18,7 +18,7 @@ class Mandelbrot extends FractalGenerator{
         return i;
     }
     @Override
-    public void getInitialRange(Double range) {
+    public void getInitialRange(Rectangle2D.Double range) {
         range.x = -2;
         range.y = -1.5;
         range.width = range.height = 3;

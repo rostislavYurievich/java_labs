@@ -32,4 +32,10 @@ public class Point2d {
     public void setY ( double val) {
         yCoord = val;
     }
+    @Override
+    public boolean equals(Object o){
+        if (o == null) return false;
+        Point2d p = (Point2d) o;
+        return (this.getY()==p.getY())&&(this.getX()==p.getX());
+    }
 }

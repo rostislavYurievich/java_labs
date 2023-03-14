@@ -4,10 +4,9 @@ public class Point3d extends Point2d{
         super(x,y);
         zCoord = z;
     }
-    //конструктор по умолчанию
+    //конструктор без аргументов
     public Point3d(){
-        super();
-        zCoord = 0;
+        this(0,0,0);
     }
 
     //геттер
@@ -19,12 +18,10 @@ public class Point3d extends Point2d{
         zCoord = c;
     }
     //метод проверяющих равенство
-    public boolean equals(Point3d p){
-        return (
-        (this.getX()==p.getX())&&
-        (this.getY()==p.getY())&&
-        (this.getZ()==p.getZ())
-        );
+    @Override
+    public boolean equals(Object o){
+        Point3d p = (Point3d) o;
+        return super.equals(o)&&(this.getZ()==p.getZ()); //можно использовать super вот так!!!
     }
     //считает расстояние до точки
     public double distanceTo(Point3d p){
