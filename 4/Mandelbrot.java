@@ -8,7 +8,7 @@ class Mandelbrot extends FractalGenerator{
     public int numIterations(double x, double y) {
         double temp, re = x, im = y;
         int i;
-        for (i = 0;(i < MAX_ITERATIONS)||(re*re+im*im>4); i++){
+        for (i = 0;(i < MAX_ITERATIONS)&&!(re*re+im*im>4); i++){
             temp = re*re-im*im+x;
             im = 2*re*im+y;
             re = temp;
