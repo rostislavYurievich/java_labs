@@ -65,5 +65,9 @@ public abstract class FractalGenerator {
      * with a result of -1.
      */
     public abstract int numIterations(double x, double y);
+
+    public String toString(){
+        return this.getClass().getName();
+    }
 }
 
