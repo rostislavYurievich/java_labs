@@ -162,9 +162,10 @@ class FractalExplorer {
             for (int j = 0; j<disp_size; j++){
                 double x = FractalGenerator.getCoord(rng.getX(),rng.getX()+rng.getWidth(), disp_size, j);
                 int numIters = fg.numIterations(x,y);
-                if (numIters == -1) numIters = 0;
+                //if (numIters == -1) numIters = 0;
                 float hue = 0.7f + (float) numIters/200f;
                 int rgbColor = Color.HSBtoRGB(hue,1f,1f);
+                if (numIters == -1) rgbColor = 0;
                 row[j] = rgbColor;
             }
             return null;

@@ -11,7 +11,7 @@ class URLDepthPair {
         this(url,0);
     }
 
-    public void incrementDepth(){ depth++; };
+    public void incDepth(){ depth++; };
 
     public String toString(){
         return url+" "+depth;
