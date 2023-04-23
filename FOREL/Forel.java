@@ -119,8 +119,9 @@ class Forel{
         @Override
         public void actionPerformed(ActionEvent e) {
             
-            taxons = new ArrayList<Taxon>();
+            
             if (e.getActionCommand().equals("run")) {
+                taxons = new ArrayList<Taxon>();
                 radius = (int)spinR.getValue();
                 data.addAll(init_data);
                 while (data.size()>0){
@@ -128,6 +129,7 @@ class Forel{
                 }
             }
             if (e.getActionCommand().equals("reset")) {
+                taxons = new ArrayList<Taxon>();
                 data.removeAll(data);
                 length = (int)spinN.getValue();
                 init_data = new RandomSet(size,length).getPoints();

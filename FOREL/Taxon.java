@@ -11,15 +11,15 @@ class Taxon {
         centerOfMass = centerPoint;
         this.radius = radius;
         Point2D newCOM = new Point2D(-1,-1);
-        while (!centerOfMass.equals(newCOM)){
+        int stationary = 0;
+        while (stationary<2){
             points = new ArrayList<Point2D>();
+            if (centerOfMass.equals(newCOM)){stationary++;}
             sievePoints(data);
             if (!newCOM.equals(new Point2D(-1,-1)))
                 centerOfMass = newCOM;
             newCOM = calculateCentroid();
         }
-        points = new ArrayList<Point2D>();
-        sievePoints(data);
         this.radius = maxDistance();
     }
 
