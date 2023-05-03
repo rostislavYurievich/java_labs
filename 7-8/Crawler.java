@@ -13,10 +13,10 @@ class Crawler {
         return visitedUrls;
     }
 
-    public download(String url){
+    public void download(String url){
         URL site = new URL("http",url.toString,80);
         ReadableByteChannel rbc = Channels.newChannel(site.openStream());
-        File file = new File("./download"+URL.getPath());
+        File file = new File("./download/"+URL.getPath());
         file.getParentFile().mkdirs();
         FileOutputStream fos = new FileOutputStream(file);
         try {
@@ -28,8 +28,16 @@ class Crawler {
         
     }
 
-    public parse(String path){
+    public parse(String path,int depth){
         File file = new File(path);
+        Scanner s = new Scanner(input);
+        s.findInLine("<a\s+(?:[^>]*?\s+)?href=([\"'])(.*?)\1");
+        MatchResult result = s.match();
+        for (int i = 1; i<result.groupCount(); i++){
+            unvisitedUrls.add(new URLDepthPair(result.group(i),depth));
+        }
+        s.close();
+
         
 
     }
