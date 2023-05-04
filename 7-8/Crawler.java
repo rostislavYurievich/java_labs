@@ -7,16 +7,21 @@ class Crawler {
     public static final string URL_PREFIX = "http://"
     LinkedList<URLDepthPair> visitedUrls = new LinkedList<URLDepthPair>;
     LinkedList<URLDepthPair> unvisitedUrls = new LinkedList<URLDepthPair>;
+    String downloadPath;
+
+    Crawler(String downloadPath){
+        this.downloadPath = downloadPath;
+    }
 
     public LinkedList<URLDepthPair> getSites()
     {
         return visitedUrls;
     }
 
-    public download(String url){
+    private void download(String url){
         URL site = new URL("http",url.toString,80);
         ReadableByteChannel rbc = Channels.newChannel(site.openStream());
-        File file = new File("./download"+URL.getPath());
+        File file = new File("./"+downloadPath+"/"+URL.getPath());
         file.getParentFile().mkdirs();
         FileOutputStream fos = new FileOutputStream(file);
         try {
@@ -27,10 +32,44 @@ class Crawler {
         }
         
     }
+    private void visitURL(URLDepthPair udp){
+        visitedUrls.
+    }
 
-    public parse(String path){
+    private boolean downloadURL(URLDepthPair udp){
+        if (!visitedUrls.contains(udp)){
+            return true;
+        }
+        existingUrl = visitedUrls.get(visitedUrls.indexOf(udp));
+        if (existingUrl.fullMatch(udp)){
+            return false;
+        }
+        else{
+            
+        }
+    }
+
+    private void parse(String path,int depth){
         File file = new File(path);
-        
+        Scanner s = new Scanner(input);
+        s.findInLine("<a\s+(?:[^>]*?\s+)?href=([\"'])(.*?)\1");
+        MatchResult result = s.match();
+        for (int i = 1; i<result.groupCount(); i++){
+            udp = new URLDepthPair(result.group(i),depth)
+            
+            unvisitedUrls.add();
+        }
+        s.close();
+    }
 
+    public void work(int depth){
+        for (URLDepthPair udp: unvisitedUrls){
+            if (udp.getDepth()<=depth){
+                String url = udp.getUrl();
+                download(url);
+                parse(url,udp.getDepth()++);
+
+            }
+        }
     }
 }
