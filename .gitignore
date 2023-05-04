@@ -2,3 +2,6 @@ lec/
 **.class
 *.pdf
 **settings.json
+**.vscode
+**target
+kurs/db.bin

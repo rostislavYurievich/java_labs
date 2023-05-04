@@ -48,7 +48,7 @@ public class Info implements Serializable{
     @Override
     public boolean equals(Object o){
         Info i = (Info) o;
-        return super.equals(o)&&(i.getID()==ID);
+        return i.getID()==ID;
     }
 
 }

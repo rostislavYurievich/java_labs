@@ -35,8 +35,7 @@ public class App
 
     private DBWorker dbw;
     
-    App(String fileName){
-        File file = new File(fileName);
+    App(File file){
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -211,7 +210,8 @@ public class App
 
     public static void main( String[] args )
     {
-        App app = new App("db.bin");
+        File file = new File("db.bin");
+        App app = new App(file);
         app.createAndShowGUI();
     }
 }
