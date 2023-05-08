@@ -68,6 +68,15 @@ public class DBWorker implements Serializable{
         return markedList;
     }
 
+    public LinkedList<Info> getMean(Double mean){
+        LinkedList<Info> newList = new LinkedList<Info>();
+        for (Info entry: data.entries){
+            if (entry.meanOcenka()>=mean)
+                newList.add(entry);
+        }
+        return newList;
+    }
+
     public void removeMarkedEntries(boolean mark){
         for (int i =0;i<data.entries.size();i++){
             if (data.entries.get(i).getMetka()==mark)

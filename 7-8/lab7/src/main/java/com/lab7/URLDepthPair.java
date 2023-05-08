@@ -1,3 +1,5 @@
+package com.lab7;
+
 class URLDepthPair {
     String url;
     int depth;
@@ -12,19 +14,14 @@ class URLDepthPair {
     }
 
     public String getUrl(){ return url;}
-    public String getDepth(){return depth;}
+    public int getDepth(){return depth;}
 
     public void incDepth(){ depth++; };
 
     @Override
     public boolean equals(Object o){
         URLDepthPair udp = (URLDepthPair)o;
-        return udp.getUrl().equals(url);
-    }
-
-    public boolean fullMatch(Object o){
-        URLDepthPair udp = (URLDepthPair)o;
-        return (udp.getUrl().equals(url)&&udp.getDepth().equals(depth));
+        return udp.getUrl().equals(url)&&(udp.getDepth()==depth);
     }
 
     public String toString(){

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -31,7 +32,10 @@ public class App
     JSpinner spin1;
     JSpinner spin2;
     JSpinner spin3;
+    JSpinner qspin;
     JTextField nameField;
+    JCheckBox checkbox;
+    boolean check = false;
 
     private DBWorker dbw;
     
@@ -73,13 +77,17 @@ public class App
         s2.add(label2,BorderLayout.NORTH);
         s3.add(label3,BorderLayout.NORTH);
         
+        checkbox = new JCheckBox("Сорт.");
+        qspin = new JSpinner(new SpinnerNumberModel(3.5, 1f, 5f, 0.5));
         spin1 = new JSpinner(new SpinnerNumberModel(5,1,5,1));
         spin2 = new JSpinner(new SpinnerNumberModel(5,1,5,1));
         spin3 = new JSpinner(new SpinnerNumberModel(5,1,5,1));
+
         s1.add(spin1,BorderLayout.SOUTH);
         s2.add(spin2,BorderLayout.SOUTH);
         s3.add(spin3,BorderLayout.SOUTH);
-
+        checkbox.setActionCommand("mean");
+        checkbox.addActionListener(al);
         resetButton.setActionCommand("reset");
         resetButton.addActionListener(al);
         saveButton.setActionCommand("save");
@@ -88,7 +96,9 @@ public class App
         delButton.addActionListener(al);
         addButton.setActionCommand("add");
         addButton.addActionListener(al);
-        nameField = new JTextField(30);
+        nameField = new JTextField(8);
+        
+
         btmPanel.add(nameField,BorderLayout.NORTH);
         btmPanel.add(s1,BorderLayout.CENTER);
         btmPanel.add(s2,BorderLayout.CENTER);
@@ -97,7 +107,9 @@ public class App
         btmPanel.add(resetButton, BorderLayout.WEST);
         btmPanel.add(saveButton, BorderLayout.WEST);
         btmPanel.add(delButton,BorderLayout.WEST);
-        
+
+        btmPanel.add(checkbox);
+        btmPanel.add(qspin, BorderLayout.EAST);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -149,6 +161,10 @@ public class App
                 itm.fireTableDataChanged();
                 return;
             }
+            if (e.getActionCommand().equals("mean")){
+                check = checkbox.isSelected();
+                itm.fireTableDataChanged();
+            }
         }
 
     };
@@ -170,7 +186,10 @@ public class App
     
         @Override
         public int getRowCount() {
-            return dbw.getList().size();
+            if (!check)
+                return dbw.getList().size();
+            else
+                return dbw.getMean((Double)qspin.getValue()).size();
         }
 
         public Class<?> getColumnClass(int c) {
@@ -180,7 +199,11 @@ public class App
     
         @Override
         public Object getValueAt(int row, int col) {
-            Info entry = dbw.getList().get(row);
+            Info entry;
+            if (!check)
+                entry = dbw.getList().get(row);
+            else
+                entry = dbw.getMean((Double)qspin.getValue()).get(row);
             switch (col){
                 case 0: return entry.getID();
                 case 1: return entry.getName();
@@ -202,7 +225,10 @@ public class App
         }
 
         public void setValueAt(Object value, int row, int col) {
-            dbw.getList().get(row).setMetka((boolean)value);
+            if (!check)
+                dbw.getList().get(row).setMetka((boolean)value);
+            else
+                dbw.getMean((Double)qspin.getValue()).get(row).setMetka((boolean)value);
             fireTableCellUpdated(row, col);
         }
  
