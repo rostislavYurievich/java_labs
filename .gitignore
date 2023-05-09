@@ -5,3 +5,6 @@ lec/
 **.vscode
 **target
 kurs/db.bin
+**/.*
+**/*.jar
+7-8/7-8.jar
