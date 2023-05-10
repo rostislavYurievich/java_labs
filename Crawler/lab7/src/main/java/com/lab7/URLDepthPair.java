@@ -25,7 +25,7 @@ class URLDepthPair {
     }
 
     public String toString(){
-        return url+" "+depth;
+        return url;
     }
 
     public String[] split(){ return url.split("/"); }
