@@ -52,7 +52,7 @@ public class URLPool {
     public String toString(){
         String str = "";
         for (URLDepthPair pair: visitedUrls){
-            if (!pair.toString().isBlank())
+            if (!pair.getUrl().isBlank())
                 str+=(pair.toString()+"\n");
         }
         return str;
